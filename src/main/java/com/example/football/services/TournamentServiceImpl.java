@@ -37,6 +37,16 @@ public class TournamentServiceImpl implements TournamentService {
 
     @Override
     @Transactional
+    public Tournament getTournamentByName(String tournamentName) {
+        Optional<Tournament> tournament = tournamentRepository.findTournamentByTournamentName(tournamentName);
+        if (tournament.isEmpty()) {
+            throw new EntityNotFoundException("tournament");
+        }
+        return tournament.get();
+    }
+
+    @Override
+    @Transactional
     public Tournament getTournamentById(Long tournamentId) {
         Optional<Tournament> tournament = tournamentRepository.findById(tournamentId);
         if (tournament.isEmpty()) {
@@ -55,6 +65,9 @@ public class TournamentServiceImpl implements TournamentService {
         Tournament tournament = new Tournament();
         tournament.setTournamentName(tournamentDTO.getTournamentName());
         tournament.setNumberOfGroups(tournamentDTO.getNumberOfGroups());
+        if(tournamentDTO.getDescription() != null) {
+            tournament.setDescription(tournamentDTO.getDescription());
+        }
         return tournamentRepository.saveAndFlush(tournament);
     }
 
@@ -68,7 +81,9 @@ public class TournamentServiceImpl implements TournamentService {
         Tournament tournamentToStore = tournament.get();
         tournamentToStore.setTournamentName(tournamentDTO.getTournamentName());
         tournamentToStore.setNumberOfGroups(tournamentDTO.getNumberOfGroups());
-        tournamentToStore.setDescription(tournamentDTO.getDescription());
+        if(tournamentDTO.getDescription() != null) {
+            tournamentToStore.setDescription(tournamentDTO.getDescription());
+        }
         return tournamentRepository.saveAndFlush(tournamentToStore);
     }
 

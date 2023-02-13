@@ -3,20 +3,23 @@ package com.example.football.dto;
 import com.example.football.validators.ValidNumberOfGroups;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Objects;
+import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import org.springframework.validation.annotation.Validated;
 
+@Validated
 public class TournamentDTO {
 
     @JsonProperty("tournamentName")
-    @NotNull
-    @NotEmpty(message = "The name of the tournament shouldn't be empty")
+    @NotNull(message = "The name of the tournament should not be empty")
+    @NotBlank(message = "The name of the tournament should not be blank")
     private String tournamentName;
 
     @JsonProperty("numberOfGroups")
-    @NotNull
-    @NotEmpty(message = "The number of groups shouldn't be empty")
     @ValidNumberOfGroups
+    @NotNull(message = "The number of groups should not be null")
     private Long numberOfGroups;
 
     @JsonProperty("description")
@@ -33,7 +36,7 @@ public class TournamentDTO {
     }
 
     @JsonProperty("tournamentName")
-    @NotNull(message = "The name of the tournament shouldn't be empty")
+    @NotBlank(message = "The name of the tournament shouldn't be empty")
     public String getTournamentName() {
         return tournamentName;
     }

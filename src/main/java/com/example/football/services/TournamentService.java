@@ -8,6 +8,8 @@ public interface TournamentService {
 
     Tournament createTournament(TournamentDTO tournamentDTO);
 
+    Tournament getTournamentByName(String tournamentName);
+
     Tournament updateTournament(Long tournamentId,TournamentDTO tournamentDTO);
 
     Tournament getTournamentById(Long tournamentId);

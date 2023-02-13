@@ -20,16 +20,13 @@ public class Tournament {
     private Long id;
 
     @Column(name = "tournament_name", unique = true)
-    @NotEmpty(message = "The name of the tournament shouldn't be empty")
     private String tournamentName;
 
     @Column(name = "number_groups")
     @NotNull
-    @ValidNumberOfGroups
-    @NotEmpty(message = "The number of groups shouldn't be empty")
     private Long numberOfGroups;
 
-    @Column
+    @Column(name = "description")
     private String description;
 
 

@@ -7,8 +7,10 @@ import com.example.football.exceptions.PlayerNotInTheMatchException;
 import com.example.football.exceptions.TeamInMatchNotChangeNamesException;
 import com.example.football.exceptions.TeamsNotInTheSameGroupException;
 import javax.persistence.NonUniqueResultException;
+import javax.validation.ConstraintViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
@@ -47,5 +49,10 @@ public class ExeptionsErrorHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(PlayerNotInTheMatchException.class)
     public ResponseEntity<Object> handlePlayerNotInTheMatchException(PlayerNotInTheMatchException ex) {
         return new ResponseEntity<>("The given player doesn't play in this match", HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<Object> handleConstraintViolationException(MethodArgumentNotValidException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
 }
