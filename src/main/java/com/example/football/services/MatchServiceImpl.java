@@ -9,6 +9,7 @@ import com.example.football.models.Team;
 import com.example.football.models.Tournament;
 import com.example.football.repositories.MatchRepository;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import org.slf4j.Logger;
@@ -82,7 +83,8 @@ public class MatchServiceImpl implements  MatchService {
             .toList();
         List<Match> allMatches = getAllMatches(tournamentId);
         return allMatches.stream()
-            .filter((match) -> teamsNamesInTheGroup.contains(match.getFirstTeamName())).toList();
+            .filter((match) -> teamsNamesInTheGroup.contains(match.getFirstTeamName())).filter((match)->match.getGroupStageMatch() )
+            .toList();
     }
 
     /*
@@ -186,5 +188,17 @@ public class MatchServiceImpl implements  MatchService {
         logger.info("Deleting match with tournament id = {} and match id = {}", tournamentId, matchId);
         Match match = getMatchById(tournamentId, matchId);
         matchRepository.delete(match);
+    }
+
+    @Override
+    @Transactional
+    public List<Match> getAllMatchesInGroupOfTeam(Long tournamentId, String teamName){
+        tournamentService.getTournamentById(tournamentId);
+        List<Match> allMatches = getAllMatches(tournamentId);
+        return allMatches.stream()
+            .filter((match) ->(Objects.equals(match.getFirstTeamName(), teamName) || Objects.equals(match.getSecondTeamName(), teamName)))
+                .filter((match)->match.getGroupStageMatch())
+            .toList();
+
     }
 }

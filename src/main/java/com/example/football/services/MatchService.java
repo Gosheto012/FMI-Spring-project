@@ -14,6 +14,8 @@ public interface MatchService {
     Match getMatchById(Long tournamentId, Long matchId);
 
     List<Match> getAllMatchesInGroup(Long tournamentId, String groupName);
+
+    List<Match> getAllMatchesInGroupOfTeam(Long tournamentId, String teamName);
     Match createMatch(Long tournamentId, MatchDTO matchDTO);
 
     Match updateMatch(Long tournamentId, Long matchId, MatchDTO matchDTO);

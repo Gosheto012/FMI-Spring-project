@@ -1,6 +1,7 @@
 package com.example.football.services;
 
 import com.example.football.dto.GroupDTO;
+import com.example.football.dto.RankingDTO;
 import com.example.football.models.Group;
 import java.util.List;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,4 +17,8 @@ public interface GroupService {
     Group updateGroup(Long tournamentId, String groupName, GroupDTO groupDTO);
 
     void deleteGroupById(Long tournamentId, String groupName);
+
+    RankingDTO updateRanking(Long tournamentId, String groupName, String teamName);
+
+    List<RankingDTO> updateTable(Long tournamentId, String groupName);
 }

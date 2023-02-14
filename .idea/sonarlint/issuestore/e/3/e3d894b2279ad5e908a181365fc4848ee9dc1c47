@@ -1,14 +1,0 @@
-
-E
-java:S1066{"/Merge this if statement with the enclosing one.(ğü‚
-?
-java:S5411z"*Use the primitive boolean expression here.(êúƒv
-A
-java:S5411‹"*Use the primitive boolean expression here.(ø¢±é
-A
-java:S5411ª"*Use the primitive boolean expression here.(ø¢±é
-N
-java:S1611U"3Remove the parentheses around the "match" parameter(ÎŠÁƒúÿÿÿÿ
-V	java:S125a"<This block of commented-out lines of code should be removed.(ÒÌâ–øÿÿÿÿ
-S
-java:S1128"8Remove this unused import 'java.util.stream.Collectors'.(Óóº´úÿÿÿÿ
